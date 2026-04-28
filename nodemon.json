@@ -1,0 +1,8 @@
+{
+    "ext": "js json scss",
+    "ignore": [
+        "node_modules",
+        "src/public",
+        "src/resources"
+    ]
+}

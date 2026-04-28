@@ -5,10 +5,12 @@ const path = require("path");
 const app = express();
 const port = 3000;
 
+app.use(express.static(path.join(__dirname, "public")));
+
 // HTTP logger middleware
 app.use(morgan("combined"));
 
-// Set up Handlebars as the view engine, 
+// Set up Handlebars as the view engine,
 // so that we can render .hbs files from the views directory
 app.engine(
   "hbs",
