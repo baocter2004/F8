@@ -33,6 +33,11 @@ app.get("/news", (req, res) => {
   res.render("tintuc");
 });
 
+// Define a route for the search URL ("/search")
+app.get("/search", (req, res) => {
+  res.render("search");
+});
+
 // Start the server and listen on the specified port
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
