@@ -8,7 +8,7 @@ const port = 3000;
 app.use(express.static(path.join(__dirname, "public")));
 
 // HTTP logger middleware
-app.use(morgan("combined"));
+// app.use(morgan("combined"));
 
 // Set up Handlebars as the view engine,
 // so that we can render .hbs files from the views directory
@@ -35,6 +35,8 @@ app.get("/news", (req, res) => {
 
 // Define a route for the search URL ("/search")
 app.get("/search", (req, res) => {
+  // Query parameters : ?key=value&key2=value2...
+  console.log(req.query.q);
   res.render("search");
 });
 
