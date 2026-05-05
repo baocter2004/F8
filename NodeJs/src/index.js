@@ -5,6 +5,9 @@ const path = require("path");
 const app = express();
 const port = 9000;
 
+// Require Route routes/index.js
+const route = require("./routes");
+
 app.use(express.static(path.join(__dirname, "public")));
 
 // Middleware for body
@@ -27,28 +30,8 @@ app.set("view engine", "hbs");
 // Set the directory for views
 app.set("views", path.join(__dirname, "resources\\views"));
 
-// Define a route for the root URL ("/")
-app.get("/", (req, res) => {
-  res.render("home");
-});
-
-// Define a route for the news URL ("/news")
-app.get("/news", (req, res) => {
-  res.render("tintuc");
-});
-
-// Define a route for the search URL ("/search")
-app.get("/search", (req, res) => {
-  // Query parameters : ?key=value&key2=value2...
-  console.log(req.query.q);
-  res.render("search");
-});
-
-// Define a post route for example
-app.post("/search", (req, res) => {
-  console.log(req.body);
-  res.send("");
-});
+// Route init
+route(app);
 
 // Start the server and listen on the specified port
 app.listen(port, () => {
