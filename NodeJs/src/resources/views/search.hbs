@@ -1,5 +1,5 @@
 <div class="search-form mt-4">
-  <form method="GET">
+  <form method="POST">
     <div class="form-group">
       <label for="search-input">Từ khóa</label>
       <input
@@ -9,6 +9,14 @@
         placeholder="nhập từ khóa"
         id="search-input"
       />
+    </div>
+
+    <div class="form-group">
+      <label for="gender-input">Giới Tính</label>
+      <select type="text" name="gender" class="form-control" id="gender-input">
+        <option value="male">Nam</option>
+        <option value="female">Nữ</option>
+      </select>
     </div>
     <button type="submit" class="btn btn-primary">Tìm kiếm</button>
   </form>

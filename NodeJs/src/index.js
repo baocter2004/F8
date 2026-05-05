@@ -3,9 +3,13 @@ const morgan = require("morgan");
 const { engine } = require("express-handlebars");
 const path = require("path");
 const app = express();
-const port = 3000;
+const port = 9000;
 
 app.use(express.static(path.join(__dirname, "public")));
+
+// Middleware for body
+app.use(express.urlencoded());
+app.use(express.json());
 
 // HTTP logger middleware
 // app.use(morgan("combined"));
@@ -38,6 +42,12 @@ app.get("/search", (req, res) => {
   // Query parameters : ?key=value&key2=value2...
   console.log(req.query.q);
   res.render("search");
+});
+
+// Define a post route for example
+app.post("/search", (req, res) => {
+  console.log(req.body);
+  res.send("");
 });
 
 // Start the server and listen on the specified port
