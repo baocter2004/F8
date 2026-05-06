@@ -1,0 +1,2 @@
+cd Nodejs
+npx lint-staged

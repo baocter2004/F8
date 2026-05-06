@@ -20,10 +20,10 @@ app.use(express.json());
 // Set up Handlebars as the view engine,
 // so that we can render .hbs files from the views directory
 app.engine(
-  "hbs",
-  engine({
-    extname: ".hbs",
-  }),
+    "hbs",
+    engine({
+        extname: ".hbs",
+    }),
 );
 // Set Handlebars as the view engine
 app.set("view engine", "hbs");
@@ -35,5 +35,5 @@ route(app);
 
 // Start the server and listen on the specified port
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`Example app listening at http://localhost:${port}`);
 });

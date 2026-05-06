@@ -13,7 +13,12 @@
   "scripts": {
     "start": "nodemon --inspect src/index.js",
     "watch:sass": "sass --watch src/resources/scss:src/public/css --no-source-map",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "beautiful": "lint-staged",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "cd .. && husky NodeJs/.husky"
+  },
+  "lint-staged": {
+    "src/**/*.{js,json,scss}": "prettier --trailing-comma all --tab-width 4 --write"
   },
   "dependencies": {
     "express": "^5.2.1",
@@ -21,7 +26,10 @@
     "sass": "^1.99.0"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "morgan": "^1.10.1",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.3"
   }
 }
