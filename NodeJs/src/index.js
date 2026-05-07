@@ -9,7 +9,7 @@ const port = 9000;
 const route = require("./routes");
 
 // Import config/db
-const db = require('./config/db');
+const db = require("./config/db");
 
 // Connect to DB
 db.connect();
