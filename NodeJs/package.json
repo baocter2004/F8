@@ -23,6 +23,7 @@
   "dependencies": {
     "express": "^5.2.1",
     "express-handlebars": "^9.0.1",
+    "mongoose": "^9.6.1",
     "sass": "^1.99.0"
   },
   "devDependencies": {

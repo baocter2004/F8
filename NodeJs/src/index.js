@@ -8,6 +8,12 @@ const port = 9000;
 // Require Route routes/index.js
 const route = require("./routes");
 
+// Import config/db
+const db = require('./config/db');
+
+// Connect to DB
+db.connect();
+
 app.use(express.static(path.join(__dirname, "public")));
 
 // Middleware for body
