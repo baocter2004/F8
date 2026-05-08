@@ -15,7 +15,7 @@
     "watch:sass": "sass --watch src/resources/scss:src/public/css --no-source-map",
     "beautiful": "lint-staged",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "cd .. && husky NodeJs/.husky"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "src/**/*.{js,json,scss}": "prettier --trailing-comma all --tab-width 4 --write"
