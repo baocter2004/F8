@@ -1,7 +1,10 @@
 const express = require("express");
 const morgan = require("morgan");
 const { engine } = require("express-handlebars");
+// Override Method (GET POST PUT PATCH DELETE)
+const methodOverride = require("method-override");
 const path = require("path");
+
 const app = express();
 const port = 9000;
 
@@ -20,15 +23,22 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded());
 app.use(express.json());
 
+// Middleware for override method - read at https://expressjs.com/en/resources/middleware/method-override.html
+app.use(methodOverride("_method"));
+
 // HTTP logger middleware
 // app.use(morgan("combined"));
 
 // Set up Handlebars as the view engine,
 // so that we can render .hbs files from the views directory
+// Custom helpers for buildin helper
 app.engine(
     "hbs",
     engine({
         extname: ".hbs",
+        helpers: {
+            sum: (a, b) => a + b,
+        },
     }),
 );
 // Set Handlebars as the view engine

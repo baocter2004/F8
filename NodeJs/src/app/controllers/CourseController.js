@@ -1,0 +1,73 @@
+const Course = require("../models/Course");
+const { mongooseToObject } = require("../../util/mongoose");
+
+class CourseController {
+    // [GET] /courses/:slug
+    // Using Promise function
+    show(req, res, next) {
+        Course.findOne({ slug: req.params.slug })
+            .then((course) => {
+                res.render("courses/show", {
+                    course: mongooseToObject(course),
+                });
+            })
+            .catch((error) => next(error));
+    }
+
+    // Using async function
+    // async show(req, res) {
+    //     try {
+    //         let course = await Course.findOne({slug: req.params.slug}).lean();
+    //         res.render("courses/show", {
+    //             course,
+    //         });
+    //     } catch (error) {
+    //         res.json({ error: "Has error : " + error });
+    //     }
+
+    //     // res.render("courses/show");
+    // }
+
+    // [GET] /courses/create
+    create(req, res, next) {
+        res.render("courses/create");
+    }
+
+    // [Post] /courses/store
+    store(req, res, next) {
+        let formData = req.body;
+        formData.thumbnail = `https://img.youtube.com/vi/${formData.videoId}/sddefault.jpg`;
+        let course = new Course(formData);
+        course
+            .save()
+            .then(() => res.redirect("/"))
+            .catch((error) => {
+                console.log(error);
+                res.status(500).send("Error");
+            });
+    }
+
+    // [GET] /courses/:id/edit
+    edit(req, res, next) {
+        const course = Course.findOne({ _id: req.params.id })
+            .then((course) => {
+                if (!course) {
+                    return res.status(404).send("Course not found");
+                }
+                res.render("courses/edit", {
+                    course: mongooseToObject(course),
+                });
+            })
+            .catch((error) => next(error));
+    }
+
+    // [PUT] /courses/:id
+    update(req, res, next) {
+        let formData = req.body;
+        Course.updateOne({ _id: req.params.id }, formData)
+            .then(() => res.redirect("/me/stored/courses"))
+            .catch(next);
+    }
+}
+
+module.exports = new CourseController();
