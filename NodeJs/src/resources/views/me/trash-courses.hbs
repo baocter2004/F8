@@ -10,7 +10,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Tên Khóa Học</th>
                 <th scope="col">Ảnh Khóa Học</th>
-                <th scope="col">Thời Gian Tạo</th>
+                <th scope="col">Thời Gian Xóa</th>
                 <th scope="col">Hành Động</th>
             </tr>
         </thead>
@@ -23,7 +23,7 @@
                 <td>
                     <img class="avatar-image" src="{{this.thumbnail}}" alt="" />
                 </td>
-                <td>{{this.createdAt}}</td>
+                <td>{{this.deletedAt}}</td>
                 <td>
                     <a href="#" class="btn btn-link btn-restore" data-id={{this._id}}>Khôi phục</a>
                     <a href="#" data-toggle="modal" data-target="#deleteModal" data-id="{{this._id}}"
