@@ -35,12 +35,11 @@ class CourseController {
 
     // [Post] /courses/store
     store(req, res, next) {
-        let formData = req.body;
-        formData.thumbnail = `https://img.youtube.com/vi/${formData.videoId}/sddefault.jpg`;
-        let course = new Course(formData);
+        req.body.thumbnail = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
+        let course = new Course(req.body);
         course
             .save()
-            .then(() => res.redirect("/"))
+            .then(() => res.redirect("/me/stored/courses"))
             .catch((error) => {
                 console.log(error);
                 res.status(500).send("Error");
@@ -69,11 +68,25 @@ class CourseController {
             .catch(next);
     }
 
+    // [PATCH] /courses/:id/restore
+    restore(req, res, next) {
+        let formData = req.body;
+        Course.restore({ _id: req.params.id }, formData)
+            .then(() => res.redirect("/me/trash/courses"))
+            .catch(next);
+    }
+
     // [DELETE] /courses/:id
     destroy(req, res, next) {
-        // Promise...
+        Course.delete({ _id: req.params.id })
+            .then(() => res.redirect("/me/stored/courses"))
+            .catch(next);
+    }
+
+    // [DELETE] /courses/:id/force
+    forceDestroy(req, res, next) {
         Course.deleteOne({ _id: req.params.id })
-            .then(() => res.redirect("back"))
+            .then(() => res.redirect("/me/trash/courses"))
             .catch(next);
     }
 }
