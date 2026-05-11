@@ -1,12 +1,31 @@
-<div class="mt-4">
+<form name="container-form" class="mt-4" method="POST" action="/courses/handle-form-actions">
     <div>
         <h3>Khóa Học Của Tôi</h3>
-        <a href="/me/trash/courses">Thùng Rác {{ deleteCount }}</a>
+        <a href="/me/trash/courses">Thùng Rác {{deleteCount}}</a>
+
+        <div class="mt-4 d-flex align-items-center">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
+                <label class="form-check-label" for="checkbox-all">
+                    Chọn tất cả
+                </label>
+            </div>
+
+            <select class="form-control form-control-sm checkbox-sellect-all-options" name="action" required>
+                <option value="">--- Chọn Hành Động ---</option>
+                <option value="delete">Xóa</option>
+            </select>
+
+            <button class="btn btn-primary btn-sm btn-check-all-submit-btn" disabled>
+                Thực hiện
+            </button>
+        </div>
     </div>
 
     <table class="table mt-4">
         <thead>
             <tr>
+                <th scope="col"></th>
                 <th scope="col">#</th>
                 <th scope="col">Tên Khóa Học</th>
                 <th scope="col">Ảnh Khóa Học</th>
@@ -17,6 +36,11 @@
         <tbody>
             {{#each courses}}
             <tr>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="courseIds" value="{{ this._id }}">
+                    </div>
+                </td>
                 {{! Custom buildin helper express-handlebar }}
                 <td scope="row">{{sum @index 1}}</td>
                 <td>{{this.name}}</td>
@@ -34,13 +58,13 @@
             <tr>
                 <td colspan="5" class="text-center">
                     Bạn chưa đăng khóa học nào !
-                    <a href="/courese/create">Đăng Khóa Học</a>
+                    <a href="/courses/create">Đăng Khóa Học</a>
                 </td>
             </tr>
             {{/each}}
         </tbody>
     </table>
-</div>
+</form>
 
 {{! Confirm delete courses - Bootstrap 4 }}
 <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
@@ -67,11 +91,13 @@
 <form name="formDeleteHidden" method="POST"></form>
 
 <script>
-    // When Dom content load document.addEventListener('DOMContentLoaded',
     document.addEventListener('DOMContentLoaded', function () {
         let courseId;
         let deleteForm = document.forms['formDeleteHidden'];
         const buttonDelete = document.getElementById('btn-delete-course');
+        const checkboxAll = $('#checkbox-all');
+        const courseItemCheckbox = $('input[name="courseIds"]');
+        const checkAllSubmitBtn = $('.btn-check-all-submit-btn');
 
         $('#deleteModal').on('show.bs.modal', function (event) {
             const button = $(event.relatedTarget);
@@ -80,10 +106,36 @@
             console.log(courseId);
         });
 
-
         buttonDelete.onclick = function () {
             deleteForm.action = '/courses/' + courseId + '?_method=DELETE';
             deleteForm.submit();
+        };
+
+        // Check box all change - jquery
+        checkboxAll.change(function () {
+            let isCheckedAll = $(this).prop('checked');
+            // Get boolean value (true/false) from the "select all" checkbox
+            courseItemCheckbox.prop('checked', isCheckedAll);
+            // Apply that value to all course item checkboxes
+            renderCheckAllSubmitBtn();
+        });
+
+        courseItemCheckbox.change(function () {
+            let isCheckedAll = courseItemCheckbox.length === $('input[name="courseIds"]:checked').length;
+            console.log(isCheckedAll);
+
+            checkboxAll.prop('checked', isCheckedAll);
+            renderCheckAllSubmitBtn();
+        });
+
+        // Re-render check all submit button
+        function renderCheckAllSubmitBtn() {
+            const checkedCount = $('input[name="courseIds"]:checked').length;
+            if (checkedCount > 0) {
+                checkAllSubmitBtn.attr('disabled', false);
+            } else {
+                checkAllSubmitBtn.attr('disabled', true);
+            }
         }
     });
 </script>
