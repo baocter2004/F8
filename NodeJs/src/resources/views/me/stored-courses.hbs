@@ -27,9 +27,15 @@
             <tr>
                 <th scope="col"></th>
                 <th scope="col">#</th>
-                <th scope="col">Tên Khóa Học</th>
+                <th scope="col">
+                    Tên Khóa Học
+                    {{{sortable 'name' _sort}}}
+                </th>
                 <th scope="col">Ảnh Khóa Học</th>
-                <th scope="col">Thời Gian Tạo</th>
+                <th scope="col">
+                    Thời Gian Tạo
+                    {{{sortable 'createdAt' _sort}}}
+                </th>
                 <th scope="col">Hành Động</th>
             </tr>
         </thead>

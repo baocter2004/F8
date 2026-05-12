@@ -5,6 +5,9 @@ const { engine } = require("express-handlebars");
 const methodOverride = require("method-override");
 const path = require("path");
 
+// Import Soft Middleware
+const SortMiddleware = require("./app/middlewares/SortMiddleware");
+
 const app = express();
 const port = 9000;
 
@@ -26,27 +29,8 @@ app.use(express.json());
 // Middleware for override method - read at https://expressjs.com/en/resources/middleware/method-override.html
 app.use(methodOverride("_method"));
 
-// Example middleware
-// Chính function là middleware
-app.get(
-    "/middleware",
-    function (req, res, next) {
-        if (["vethuong", "vevip"].includes(req.query.ve)) {
-            req.face = "gạch gạch gạch!!!!";
-            return next();
-        }
-
-        res.status(403).json({
-            message: "Access Denied!",
-        });
-    },
-    function (req, res, next) {
-        res.json({
-            message: "successfully!",
-            face: req.face,
-        });
-    },
-);
+// app all route
+app.use(SortMiddleware);
 
 // HTTP logger middleware
 // app.use(morgan("combined"));
@@ -60,6 +44,26 @@ app.engine(
         extname: ".hbs",
         helpers: {
             sum: (a, b) => a + b,
+            sortable: (field, sort) => {
+                const sortType = field === sort.column ? sort.type : "default";
+                const icons = {
+                    default: "fa-arrows-up-down",
+                    desc: "fa-arrow-down",
+                    asc: "fa-arrow-up",
+                };
+                const types = {
+                    default: "desc",
+                    asc: "desc",
+                    desc: "asc",
+                };
+
+                const icon = icons[sortType];
+                const type = types[sort.type];
+
+                return `<a href="?_sort&column=${field}&type=${type}">
+                        <i class="fa-solid ${icon}"></i>
+                    </a>`;
+            },
         },
     }),
 );
