@@ -26,6 +26,28 @@ app.use(express.json());
 // Middleware for override method - read at https://expressjs.com/en/resources/middleware/method-override.html
 app.use(methodOverride("_method"));
 
+// Example middleware
+// Chính function là middleware
+app.get(
+    "/middleware",
+    function (req, res, next) {
+        if (["vethuong", "vevip"].includes(req.query.ve)) {
+            req.face = "gạch gạch gạch!!!!";
+            return next();
+        }
+
+        res.status(403).json({
+            message: "Access Denied!",
+        });
+    },
+    function (req, res, next) {
+        res.json({
+            message: "successfully!",
+            face: req.face,
+        });
+    },
+);
+
 // HTTP logger middleware
 // app.use(morgan("combined"));
 
