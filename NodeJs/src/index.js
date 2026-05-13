@@ -6,7 +6,7 @@ const methodOverride = require("method-override");
 const path = require("path");
 
 // Import Soft Middleware
-const SortMiddleware = require("./app/middlewares/SortMiddleware");
+const SortMiddleware = require("./app/middlewares/softMiddleware");
 
 const app = express();
 const port = 9000;
@@ -42,29 +42,7 @@ app.engine(
     "hbs",
     engine({
         extname: ".hbs",
-        helpers: {
-            sum: (a, b) => a + b,
-            sortable: (field, sort) => {
-                const sortType = field === sort.column ? sort.type : "default";
-                const icons = {
-                    default: "fa-arrows-up-down",
-                    desc: "fa-arrow-down",
-                    asc: "fa-arrow-up",
-                };
-                const types = {
-                    default: "desc",
-                    asc: "desc",
-                    desc: "asc",
-                };
-
-                const icon = icons[sortType];
-                const type = types[sort.type];
-
-                return `<a href="?_sort&column=${field}&type=${type}">
-                        <i class="fa-solid ${icon}"></i>
-                    </a>`;
-            },
-        },
+        helpers: require("./helpers/handlerbars"),
     }),
 );
 // Set Handlebars as the view engine
