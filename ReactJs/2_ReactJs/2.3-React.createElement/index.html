@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+  </head>
+  <body>
+    <h1>React.createElement</h1>
+    <div id="root"></div>
+    <script>
+      // ###1. React.createElement() là gì ?
+      // Trong React, mọi giao diện đều được tạo ra từ các React Element
+      // Cú Pháp:
+      // React.createElement(
+      //     type, // Loại phần tử (ví dụ: 'div', 'h1', 'p', ...)
+      //     props, // Thuộc tính của phần tử (ví dụ: { className: 'my-class' })
+      //     ...children // Các phần tử con (có thể là chuỗi hoặc các React Element khác)
+      // )
+      // Ví dụ:
+      const element = React.createElement(
+        "h1",
+        { className: "greeting" },
+        "Hello, world!",
+      );
+      console.log("createElement", element);
+      // Kết quả sẽ là một đối tượng React Element:
+      // {
+      //     type: 'h1',
+      //     props: {
+      //         className: 'greeting',
+      //         children: 'Hello, world!'
+      //     }
+      // }
+      // => React Element thực chất chỉ alf một đối tượng JavaScript đơn giản
+      //  không phải là một phần tử DOM thực sự.
+      // React sẽ sử dụng thông tin từ React Element
+      // để tạo ra các phần tử DOM tương ứng khi render giao diện.
+
+      // ###2. So sánh với document.createElement()
+
+      // ##Javacript thuần :
+      const div = document.createElement("div");
+      div.className = "my-div";
+      div.textContent = "Hello, world!";
+      console.log(div);
+      // Kết quả sẽ là một phần tử DOM thực sự:
+      // <div class="my-div">Hello, world!</div>
+      // => document.createElement() tạo ra một phần tử DOM thực sự
+      // trong khi React.createElement() tạo ra một đối tượng React Element
+      // mà React sẽ sử dụng để tạo ra phần tử DOM khi render giao diện.
+
+      // ##React :
+      const reactElement = React.createElement(
+        "div",
+        { className: "my-div" },
+        "Hello, world!",
+      );
+      console.log("React Element", reactElement);
+      // Kết quả sẽ là một đối tượng React Element:
+      // {
+      //     type: 'div',
+      //     props: {
+      //         className: 'my-div',
+      //         children: 'Hello, world!'
+      //     }
+      // }
+      // React không thao tác DOM trực tiếp liên tục
+      // mà sử dụng React Element để tối ưu hiệu suất và
+      // quản lý giao diện một cách hiệu quả hơn.
+
+      // State thay đổi
+      // ↓
+      // Virtual DOM thay đổi
+      // ↓
+      // React tìm phần khác nhau
+      // ↓
+      // Cập nhật DOM thật
+
+      // ###3. Thay đổi id, className, style
+      const h1 = React.createElement(
+        "h1",
+        {
+          id: "my-heading",
+          className: "heading",
+          style: {
+            color: "red",
+          },
+        },
+        "Hello, world!",
+      );
+
+      console.log("H1 Element", h1);
+
+      // ###4. Thêm text , html
+      const add = React.createElement("h1", null, "Hello React");
+      console.log("Add Element", add);
+
+      const ul = React.createElement(
+        "ul",
+        null,
+        React.createElement("li", null, "Item 1"),
+        React.createElement("li", null, "Item 2"),
+        React.createElement("li", null, "Item 3"),
+      );
+      console.log("UL Element", ul);
+
+      // ###5. Tạo thẻ đơn
+      const h1Alone = React.createElement(
+        "h1",
+        {
+          title: "Hello",
+          className: "h1-alone",
+        },
+        "Hello Alone",
+      );
+      console.log("H1 Alone Element", h1Alone);
+      // Render :
+      ReactDOM.render(h1Alone, document.getElementById("root"));
+
+      // =========================== homework ===========================
+      //   <div class="post-item">
+      //     <h2 title="Hoc React tai F8">Hoc ReactJS</h2>
+
+      //     <p>ReactJS tu co ban toi nang cao</p>
+      //   </div>;
+
+      const postItem = React.createElement(
+        "div",
+        { className: "post-item" },
+        React.createElement("h2", { title: "Hoc React tai F8" }, "Hoc ReactJS"),
+        React.createElement("p", null, "ReactJS tu co ban toi nang cao"),
+      );
+      // Render :
+      ReactDOM.render(postItem, document.getElementById("root"));
+    </script>
+  </body>
+</html>
