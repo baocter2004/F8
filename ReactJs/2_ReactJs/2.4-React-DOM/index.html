@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React DOM</title>
+    <style>
+        .course-item {
+            border: 1px solid #ccc;
+            padding: 16px;
+            margin: 16px;
+            width: 300px;
+        }
+        .course-image {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+  </head>
+  <body>
+    <h1>React DOM</h1>
+    <div id="root"></div>
+    <script>
+      //   // get root element
+      const rootElement = document.getElementById("root");
+
+      // React
+      //   const postItem = React.createElement(
+      //     "div",
+      //     { className: "post-item" },
+      //     React.createElement("h2", null, "My First Post"),
+      //     React.createElement("p", null, "This is the content of my first post."),
+      //   );
+
+      //   console.log(postItem);
+
+      //   // React-DOM -> render UI
+      //   // Global ReactDOM object is available in the browser, which is used to render React components into the DOM.
+      //   ReactDOM.render(postItem, rootElement);
+
+      // ======================== HOMEWORK ========================
+
+      // Bài 1:
+      // Tạo React Element tương ứng với cấu trúc sau:
+      //
+      // <h1>Hello React</h1>
+
+      const h1Hello = React.createElement("h1", null, "Hello React");
+      //   console.log(h1Hello);
+
+      // =========================================================
+
+      // Bài 2:
+      // Tạo React Element tương ứng với cấu trúc sau:
+      //
+      // <p>I am learning React.</p>
+
+      const pLearning = React.createElement("p", null, "I am learning React.");
+      //   console.log(pLearning);
+
+      // =========================================================
+
+      // Bài 3:
+      // Tạo React Element tương ứng với cấu trúc sau:
+      //
+      // <div class="container">
+      //   Welcome to React!
+      // </div>
+
+      const divContainer = React.createElement(
+        "div",
+        {
+          className: "container",
+        },
+        "Welcome to React!",
+      );
+      //   console.log(divContainer);
+
+      // =========================================================
+
+      // Bài 4:
+      // Tạo React Element tương ứng với cấu trúc sau:
+      //
+      // <div class="post-item">
+      //   <h2>Learning React</h2>
+      //   <p>React makes building UI easier.</p>
+      // </div>
+      const postItem = React.createElement(
+        "div",
+        {
+          className: "post-item",
+        },
+        React.createElement("h2", null, "Learning React"),
+        React.createElement("p", null, "React makes building UI easier."),
+      );
+      //   console.log(postItem);
+
+      // =========================================================
+
+      // Bài 5:
+      // Tạo React Element tương ứng với cấu trúc sau:
+      //
+      // <ul>
+      //   <li>HTML</li>
+      //   <li>CSS</li>
+      //   <li>JavaScript</li>
+      // </ul>
+      const ulList = React.createElement(
+        "ul",
+        null,
+        React.createElement("li", null, "HTML"),
+        React.createElement("li", null, "CSS"),
+        React.createElement("li", null, "JavaScript"),
+      );
+      //   console.log(ulList);
+
+      // =========================================================
+
+      // Bài 6:
+      // Tạo React Element tương ứng với cấu trúc sau:
+      //
+      // <div class="product">
+      //   <h3>iPhone 15</h3>
+      //   <p>Price: $999</p>
+      //   <button>Buy Now</button>
+      // </div>
+
+      const productItem = React.createElement(
+        "div",
+        {
+          className: "product",
+        },
+        React.createElement("h3", null, "iPhone 15"),
+        React.createElement("p", null, "Price: $999"),
+        React.createElement("button", null, "Buy Now"),
+      );
+      //   console.log(productItem);
+
+      // =========================================================
+
+      // Bài 7:
+      // Tạo React Element tương ứng với cấu trúc sau:
+      //
+      // <div class="card">
+      //   <img src="avatar.jpg" alt="Avatar" />
+      //   <h2>Nguyen Van A</h2>
+      //   <p>Frontend Developer</p>
+      // </div>
+      const cardItem = React.createElement(
+        "div",
+        {
+          className: "card",
+        },
+        React.createElement("img", {
+          src: "avatar.jpg",
+          alt: "Avatar",
+        }),
+        React.createElement("h2", null, "Nguyen Van A"),
+        React.createElement("p", null, "Frontend Developer"),
+      );
+      //   console.log(cardItem);
+
+      // =========================================================
+
+      // Bài 8:
+      // Tạo React Element tương ứng với cấu trúc sau:
+      //
+      // <div id="app">
+      //   <header>
+      //     <h1>My Website</h1>
+      //   </header>
+      //
+      //   <main>
+      //     <p>Welcome to my website.</p>
+      //   </main>
+      //
+      //   <footer>
+      //     Copyright 2025
+      //   </footer>
+      // </div>
+      // dùng React-DOM để render
+      const app = React.createElement(
+        "div",
+        {
+          id: "app",
+        },
+        React.createElement(
+          "header",
+          null,
+          React.createElement("h1", null, "My Website"),
+        ),
+        React.createElement(
+          "main",
+          null,
+          React.createElement("p", null, "Welcome to my website."),
+        ),
+        React.createElement(
+          "footer",
+          null,
+          React.createElement("p", null, "Copyright 2025"),
+        ),
+      );
+      //   ReactDOM.render(app, rootElement);
+
+      // =========================================================
+
+      // CHALLENGE:
+      // Tạo React Element tương ứng với cấu trúc sau:
+      //
+      // <div class="course-item">
+      //   <img src="react.png" alt="React" />
+      //   <h2>ReactJS</h2>
+      //   <p>Learn React from basic to advanced.</p>
+      //   <button>Start Learning</button>
+      // </div>
+      // dùng React-DOM để render
+      const courseItem = React.createElement(
+        "div",
+        {
+          className: "course-item",
+        },
+        React.createElement("img", {
+          className: "course-image",
+          src: "https://www.logo.wine/a/logo/React_(web_framework)/React_(web_framework)-Logo.wine.svg",
+          alt: "React",
+        }),
+        React.createElement("h2", null, "ReactJS"),
+        React.createElement("p", null, "Learn React from basic to advanced."),
+        React.createElement("button", null, "Start Learning"),
+      );
+      ReactDOM.render(courseItem, rootElement);
+
+      // =========================================================
+    </script>
+  </body>
+</html>
