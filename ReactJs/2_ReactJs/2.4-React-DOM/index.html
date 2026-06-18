@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>React DOM</title>
     <style>
-        .course-item {
-            border: 1px solid #ccc;
-            padding: 16px;
-            margin: 16px;
-            width: 300px;
-        }
-        .course-image {
-            width: 100%;
-            height: auto;
-        }
+      .course-item {
+        border: 1px solid #ccc;
+        padding: 16px;
+        margin: 16px;
+        width: 300px;
+      }
+      .course-image {
+        width: 100%;
+        height: auto;
+      }
     </style>
     <script
-      src="https://unpkg.com/react@17/umd/react.development.js"
+      src="https://unpkg.com/react@18/umd/react.development.js"
       crossorigin
     ></script>
     <script
-      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
       crossorigin
     ></script>
   </head>
@@ -236,7 +236,14 @@
         React.createElement("p", null, "Learn React from basic to advanced."),
         React.createElement("button", null, "Start Learning"),
       );
-      ReactDOM.render(courseItem, rootElement);
+      // React@17
+      // ReactDOM.render(courseItem, rootElement);
+
+      // React@18
+      // tại sao phải dùng ReactDOM.createRoot thay vì ReactDOM.render?
+      // lý do là vì React 18 đã thay đổi cách render UI, ReactDOM.render đã bị deprecated, thay vào đó ta dùng ReactDOM.createRoot để tạo root và render UI.
+      // create root trả về một object root, object root có method render để render UI
+      ReactDOM.createRoot(rootElement).render(courseItem);
 
       // =========================================================
     </script>
