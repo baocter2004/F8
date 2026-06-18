@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React DOM</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>React DOM</h1>
+    <div id="root"></div>
+    <script type="text/babel">
+      // JSX => Javascript XML
+
+      // Trước :
+      const ul = React.createElement(
+        "ul",
+        null,
+        React.createElement("li", null, "Javascript"),
+        React.createElement("li", null, "ReactJS"),
+      );
+
+      const ulJSX = (
+        <ul>
+          <li>Javascript</li>
+          <li>ReactJS</li>
+        </ul>
+      );
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(ulJSX);
+    </script>
+  </body>
+</html>
