@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React DOM</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>React DOM</h1>
+    <div id="root"></div>
+    <script type="text/babel">
+      const courses = [
+        {
+          name: "HTML, CSS",
+        },
+        {
+          name: "Javascript",
+        },
+        {
+          name: "ReactJS",
+        },
+      ];
+
+      const jsx = (
+        <ul>
+          {courses.map((course, index) => (
+            // React.createElement("li", { key: course.name }, course.name);
+            // prop key là bắt buộc khi render danh sách trong ReactJS, 
+            // giúp React xác định các phần tử nào đã thay đổi, thêm hoặc xóa.
+            <li key={index}>{course.name}</li>
+          ))}
+        </ul>
+      );
+
+      console.log(jsx);
+
+      ReactDOM.createRoot(document.getElementById("root")).render(jsx);
+    </script>
+  </body>
+</html>
