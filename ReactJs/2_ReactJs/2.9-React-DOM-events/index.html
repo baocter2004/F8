@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Element Types</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // courses
+      const courses = [
+        {
+          id: 1,
+          name: "ReactJS",
+          description: "A JavaScript library for building user interfaces",
+          price: 100,
+          img_thumbnail: "https://reactjs.org/logo-og.png",
+        },
+        {
+          id: 2,
+          name: "NodeJS",
+          description:
+            "A JavaScript runtime built on Chrome's V8 JavaScript engine",
+          price: 150,
+          img_thumbnail: "https://nodejs.org/logo-og.png",
+        },
+        {
+          id: 3,
+          name: "JavaScript",
+          description:
+            "A programming language that conforms to the ECMAScript specification",
+          price: 200,
+          img_thumbnail:
+            "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Performance",
+        },
+      ];
+
+      const CourseItem = ({ course }) => (
+        <div key={course.id} className="course-item">
+          <img
+            style={{ width: "100%", height: "auto" }}
+            src={course.img_thumbnail}
+            alt={course.name}
+          />
+          <h2>{course.name}</h2>
+          <p>{course.description}</p>
+          <p>Price: ${course.price.toFixed(2)}</p>
+        </div>
+      );
+
+      // App.js
+      function App() {
+        return (
+          <div id="wrapper">
+            <header>
+              <h1>My App</h1>
+            </header>
+            {courses.map((course) => (
+              <CourseItem key={course.id} course={course} />
+            ))}
+            
+
+            // DOM events
+            <button onClick={() => console.log(Math.random())}>
+              Click me!
+            </button>
+          </div>
+        );
+      }
+
+      // index.js
+      const app = <App />;
+      ReactDOM.createRoot(document.getElementById("root")).render(app);
+    </script>
+  </body>
+</html>
