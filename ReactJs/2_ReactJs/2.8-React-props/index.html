@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Element Types</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // PostItem.js
+      function PostItem(props) {
+        const { title = "Default Title", content = "Default content", imageUrl, callback } = props;
+        if (callback) {
+          const random = Math.random();
+          callback(random);
+        }
+        return (
+          <div className="post-item" style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px", textAlign: "center" }}>
+            <img src={imageUrl} alt={title} />
+            <h2>{title}</h2>
+            <p>{content}</p>
+          </div>
+        );
+      }
+      // App.js
+      function App() {
+        return (
+          <div id="wrapper">
+            <header>
+              <h1>My App</h1>
+            </header>
+            <main>
+              <div className="posts-list">
+                <PostItem />
+                <PostItem 
+                  title="Post 1"
+                  content="This is the first post."
+                  imageUrl="https://picsum.photos/200/300"
+                  callback= {(random) => {
+                    console.log("Callback from PostItem:", random);
+                  }}
+                />
+              </div>
+            </main>
+          </div>
+        );
+      }
+
+      // index.js
+      const app = <App />;
+      ReactDOM.createRoot(document.getElementById("root")).render(app);
+    </script>
+  </body>
+</html>
