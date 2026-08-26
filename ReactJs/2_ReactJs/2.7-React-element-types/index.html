@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Element Types</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function Header() {
+        return (
+          <header>
+            <h1>My App</h1>
+          </header>
+        );
+      }
+
+      class Content extends React.Component {
+        render() {
+          return (
+            <main>
+              <p>This is the content of the app.</p>
+            </main>
+          );
+        }
+      }
+
+      // Homework
+      function Blog() {
+        return (
+          <div className="posts-list">
+            <div className="post-item">
+              <img src="" alt="Post 1" />
+              <h2>Post 1</h2>
+              <p>This is the first post.</p>
+            </div>
+          </div>
+        );
+      }
+
+      const app = (
+        <div>
+          <Header />
+          <Content />
+          <Blog />
+        </div>
+      );
+
+      ReactDOM.createRoot(document.getElementById("root")).render(app);
+    </script>
+  </body>
+</html>
